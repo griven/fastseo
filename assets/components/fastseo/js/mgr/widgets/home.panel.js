@@ -33,7 +33,7 @@ fastSEO.panel.Home = function(config) {
                     name: 'button_clear',
                     fieldLabel: '',
                     text: _('fastseo.rename'),
-                    width: 30,
+                    width: 130,
                     handler: this.updateResources
                 },{
                     xtype: 'fastseo-grid-fastseo'

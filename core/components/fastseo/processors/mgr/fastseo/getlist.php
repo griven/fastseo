@@ -29,6 +29,10 @@ $resources1 = $modx->getIterator('modResource', $c);
 $list = array();
 foreach ($resources1 as $res) {
     $resourceArray = $res->toArray();
+    $tvs = $res->getMany('TemplateVars');
+    foreach ($tvs as $tv) {
+        $resourceArray['tv_'.$tv->name] = $tv->value;
+    }
     $list[]= $resourceArray;
 }
 

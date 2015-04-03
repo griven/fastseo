@@ -13,6 +13,13 @@ if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('fastseo.fa
 $resource = $modx->getObject('modResource',$_DATA['id']);
 if (empty($resource)) return $modx->error->failure($modx->lexicon('fastseo.fastseo_err_nf'));
 
+// ищем tv
+foreach($_DATA as $key=>$value) {
+    if(strpos($key,"tv_") !== false){
+        $resource->setTVValue(str_replace('tv_', '',$key), $value);
+    }
+}
+
 $resource->fromArray($_DATA);
 
 /* save */

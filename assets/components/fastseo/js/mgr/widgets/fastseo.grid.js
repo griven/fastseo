@@ -7,7 +7,7 @@ fastSEO.grid.fastSEO = function(config) {
             action: 'mgr/fastseo/getList'
         }
         ,save_action: 'mgr/fastseo/updateFromGrid'
-        ,fields: ['id','pagetitle','parent']
+        ,fields: ['id','pagetitle','parent','tv_meta_title']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
@@ -28,9 +28,15 @@ fastSEO.grid.fastSEO = function(config) {
             header: 'parent id'
             ,dataIndex: 'parent'
             ,sortable: false
-            ,width: 350
+            ,width: 50
             ,editor: { xtype: 'textfield' }
-        },]
+        },{
+            header: 'meta_title'
+            ,dataIndex: 'tv_meta_title'
+            ,sortable: true
+            ,width: 100
+            ,editor: { xtype: 'textfield' }
+        }]
         ,tbar: [{
             xtype: 'textfield'
             ,id: 'fastseo-search-filter'
