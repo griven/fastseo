@@ -18,24 +18,24 @@ if(strpos($field,"tv_")!==false) {
 }
 
 // получаем список ресурсов
-$resources = $modx->getCollection("modResource", array('parent' => $parent_id));
+$resoursces = $modx->getCollection("modResource", array('parent' => $parent_id));
 
 // разбираем полученный шаблон
 $tv_ar = array(); //templates variables array
-$rf_ar = array(); //resource fields array 
+$rf_ar = array(); //resoursce fields array 
 $param_ar = split('\+', $params);
 
 for($i=0; $i<count($param_ar); $i++) {
     $param = $param_ar[$i];
     if(strpos($param,"tv_") !== false){
-        $tv_ar["$i"] = trim(str_replace('tv_','',$param));
+        $tv_ar["$i"] = str_replace('tv_','',$param);
     } else if(strpos($param_ar[$i],"rf_") !== false){
-        $rf_ar["$i"] = trim(str_replace('rf_','',$param));
+        $rf_ar["$i"] = str_replace('rf_','',$param);
     }
 }
 
 // заполняем поля ресурсов
-foreach ($resources as $res) {
+foreach ($resoursces as $res) {
     // вставляем полученные tv значения в итоговый массив
     foreach($tv_ar as $i=>$tv) {
         $param_ar[$i] = getParam($res, $tv, "tv");
@@ -77,6 +77,12 @@ function getParam($res, $param, $field_type) {
                     $result = $parent->getTVValue($param);
                 }
             }
+        }
+    } else {
+        if($field_type == "rf") {
+            $result = $res->get($param);
+        } else {
+            $result = $res->getTVValue($param);
         }
     }
     
